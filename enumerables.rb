@@ -56,6 +56,26 @@ class Array
   def my_rotate(a=1)
     self.drop(a % self.length).concat(self.take(a % self.length))
   end
+
+  def my_join(connector = '')
+    ans = ''
+    self.each_with_index do |el, i| 
+      unless i === self.length - 1
+        ans += el 
+        ans += connector
+      end
+    end
+    ans += self[-1]
+    ans
+  end
+  
+  def my_reverse
+    ans = []
+    self.my_each do |el| 
+      ans.unshift(el)
+    end
+    ans
+  end
 end
 
 
@@ -72,10 +92,15 @@ if __FILE__ == $0
   # p array.my_any { |num| num > 1 } # => true
   # p array.my_any { |num| num == 4 } # => false
   # p array.my_zip(a, b)
-  p array.my_rotate(1)
-  p array.my_rotate(4)
-  p array.my_rotate(-1)
-  p array.my_rotate(-4)
+  # p array.my_rotate(1)
+  # p array.my_rotate(4)
+  # p array.my_rotate(-1)
+  # p array.my_rotate(-4)
   # p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten # => [1, 2, 3, 4, 5, 6, 7, 8]
+  # a = [ "a", "b", "d", "c", "d" ]
+  # p a.my_join         # => "abcd"
+  # p a.my_join("$")    # => "a$b$c$d"
+  p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
+  p [ 1 ].my_reverse               #=> [1]
 
 end
